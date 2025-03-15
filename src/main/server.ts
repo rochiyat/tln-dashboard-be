@@ -1,9 +1,8 @@
 import { Elysia } from 'elysia';
-import { authController } from '@/interface/controllers/auth.controller';
 import { cors } from '@elysiajs/cors';
 import { errorHandler } from '@/interface/middleware/error-handler';
 import { swagger } from '@elysiajs/swagger';
-import { userController } from '@/interface/controllers/user.controller';
+import { v1Routes } from './routes/v1';
 
 export const createServer = (port: number = 3000) => {
     return new Elysia()
@@ -12,16 +11,14 @@ export const createServer = (port: number = 3000) => {
             path: '/docs',
             documentation: {
                 info: {
-                    title: 'ElysiaJS + Drizzle API',
+                    title: 'ElysiaJS + Drizzle',
                     version: '1.0.0'
                 }
             }
         }))
 
         .use(errorHandler)
-
-        .use(authController)
-        .use(userController)
+        .use(v1Routes)
 
         .get('/health', () => ({
             status: 'ok',

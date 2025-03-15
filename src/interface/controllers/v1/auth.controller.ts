@@ -1,9 +1,9 @@
 import { Elysia, t } from 'elysia';
 
 import { authService } from '@/application/services/auth.service';
-import { authValidators } from '../validators/auth-validators';
+import { authValidators } from '../../validators/v1/auth-validators';
 
-export const authController = new Elysia({ prefix: '/auth' })
+export const authControllerV1 = new Elysia({ prefix: '/auth' })
     .use(authValidators)
     .use(authService)
 
