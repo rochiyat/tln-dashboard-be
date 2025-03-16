@@ -14,8 +14,12 @@ A production-ready starter template using ElysiaJS, Drizzle ORM, and Bun.
 - 🧠 **Type Safety**: Full TypeScript support with end-to-end type safety
 - 🔍 **Error Handling**: Comprehensive error handling system
 - 🔄 **Migrations**: Database migration system
+- ⛔ **rate limiting**: rating limiting using redis
+- 📫 **otp mail verification**: mail verification using resend and react email
 
 ## Project Structure
+
+made using [dirscanner](https://github.com/aymaneallaoui/dirscanner)
 
 ```
 src/
