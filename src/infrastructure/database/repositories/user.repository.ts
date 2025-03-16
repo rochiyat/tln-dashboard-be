@@ -168,4 +168,12 @@ export class DrizzleUserRepository implements UserRepository {
 
         return true;
     }
+
+    async findByVerificationToken(token: string): Promise<UserEntity | null> {
+        const result = await db.query.users.findFirst({
+            where: eq(users.verificationToken, token)
+        });
+
+        return result || null;
+    }
 }

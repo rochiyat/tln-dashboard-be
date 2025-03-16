@@ -6,6 +6,7 @@ export interface UserRepository {
     findById(id: string): Promise<UserEntity | null>;
     findByEmail(email: string): Promise<UserEntity | null>;
     findByUsername(username: string): Promise<UserEntity | null>;
+    findByVerificationToken(token: string): Promise<UserEntity | null>;
     createUser(userData: Partial<UserEntity>): Promise<UserEntity>;
     updateUser(id: string, userData: Partial<UserEntity>): Promise<UserEntity>;
     deleteUser(id: string): Promise<boolean>;

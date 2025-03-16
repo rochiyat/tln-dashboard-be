@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
-import { authMiddleware } from '../../middleware/auth-middleware';
+import { authMiddleware } from '@/interface/middleware/auth-middleware';
 import { userService } from '@/application/services/user.service';
-import { userValidators } from '../../validators/v1/user-validators';
+import { userValidators } from '@/interface/validators/v1/user-validators';
 
 export const userControllerV1 = new Elysia({ prefix: '/users' })
     .use(userValidators)

@@ -1,7 +1,7 @@
 import { Elysia, t } from 'elysia';
 import { describe, expect, test } from 'bun:test';
 
-import { DrizzleUserRepository } from '../infrastructure/database/repositories/user-repository';
+import { DrizzleUserRepository } from '@/infrastructure/database/repositories/user.repository';
 import { authService } from '@/application/services/auth.service';
 
 class MockUserRepository extends DrizzleUserRepository {

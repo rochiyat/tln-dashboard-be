@@ -13,7 +13,29 @@ export const authValidators = new Elysia()
             password: t.String({
                 minLength: 8,
                 error: 'Password must be at least 8 characters long'
-            })
+            }),
+            useOTP: t.Optional(t.Boolean())
+        }),
+
+        'auth.verifyOTP': t.Object({
+            userId: t.String(),
+            otp: t.String({ pattern: '^[0-9]{6}$', error: 'OTP must be a 6-digit number' })
+        }),
+
+        'auth.requestOTP': t.Object({
+            email: t.String({ format: 'email' })
+        }),
+
+        'auth.requestPasswordResetOTP': t.Object({
+            email: t.String({ format: 'email' }),
+            useOTP: t.Boolean()
+        }),
+
+        'auth.resetPasswordOTP': t.Object({
+            email: t.String({ format: 'email' }),
+            otp: t.String({ pattern: '^[0-9]{6}$', error: 'OTP must be a 6-digit number' }),
+            password: t.String({ minLength: 8 }),
+            confirmPassword: t.String()
         }),
 
         'auth.signin': t.Object({
@@ -37,4 +59,4 @@ export const authValidators = new Elysia()
             message: t.String()
         })
     })
-    .as("global")
+    .as("scoped")

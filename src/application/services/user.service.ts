@@ -1,4 +1,4 @@
-import { DrizzleUserRepository } from '../../infrastructure/database/repositories/user-repository';
+import { DrizzleUserRepository } from '@/infrastructure/database/repositories/user.repository';
 import { Elysia } from 'elysia';
 
 export const userService = new Elysia({ name: 'Service.User' })

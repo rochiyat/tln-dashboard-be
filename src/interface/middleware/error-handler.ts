@@ -21,4 +21,4 @@ export const errorHandler = new Elysia()
             message: (error as Error).message || 'An unexpected error occurred'
         };
     })
-    .as('global');
+    .as('scoped');
