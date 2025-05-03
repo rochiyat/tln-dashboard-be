@@ -1,6 +1,6 @@
 CREATE TABLE "profiles" (
-	"id" varchar PRIMARY KEY NOT NULL,
-	"user_id" varchar NOT NULL,
+	"id" varchar(255) PRIMARY KEY NOT NULL,
+	"user_id" varchar(255) NOT NULL,
 	"full_name" varchar(100),
 	"bio" text,
 	"avatar_url" varchar(255),
@@ -11,8 +11,8 @@ CREATE TABLE "profiles" (
 );
 --> statement-breakpoint
 CREATE TABLE "sessions" (
-	"id" varchar PRIMARY KEY NOT NULL,
-	"user_id" varchar NOT NULL,
+	"id" varchar(255) PRIMARY KEY NOT NULL,
+	"user_id" varchar(255) NOT NULL,
 	"token" varchar(255) NOT NULL,
 	"expires_at" timestamp NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE "sessions" (
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
-	"id" varchar PRIMARY KEY NOT NULL,
+	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"username" varchar(50) NOT NULL,
 	"password" varchar(255) NOT NULL,

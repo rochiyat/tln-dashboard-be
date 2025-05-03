@@ -7,7 +7,7 @@ A production-ready starter template using ElysiaJS, Drizzle ORM, and Bun.
 - 🧩 **Clean Architecture**: Domain-driven design with clear separation of concerns
 - 🔐 **Authentication**: JWT-based authentication system
 - 👤 **User Management**: Complete user entity with profile management
-- 🔄 **Database**: Drizzle ORM with PostgreSQL
+- 🔄 **Database**: Drizzle ORM with MYSQL
 - 📝 **Validation**: End-to-end type safety with Elysia's built-in validation
 - 📚 **API Documentation**: Auto-generated OpenAPI/Swagger documentation
 - 🧪 **Testing**: Unit and integration tests setup

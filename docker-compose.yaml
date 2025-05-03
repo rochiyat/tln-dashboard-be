@@ -1,54 +1,47 @@
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: elysia_postgres
+  mysql:
+    image: mysql:8-alpine
+    container_name: tln_mysql
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: elysia_drizzle
-      PGDATA: /var/lib/postgresql/data/pgdata
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
+      MYSQL_DB: tln
+      MYSQLDATA: /var/lib/mysql/data
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "${MYSQL_PORT:-3306}:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - mysql_data:/var/lib/mysql
     networks:
-      - elysia_network
+      - tln_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "mysql_isready -U mysql"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: elysia_pgadmin
+  adminer:
+    image: adminer
+    container_name: tln_adminer
     restart: unless-stopped
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@example.com}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-adminpassword}
-      PGADMIN_CONFIG_SERVER_MODE: "False"
     ports:
-      - "${PGADMIN_PORT:-5050}:80"
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - "${ADMINER_PORT:-8080}:8080"
     networks:
-      - elysia_network
+      - tln_network
     depends_on:
-      - postgres
+      - mysql
 
   redis:
     image: redis:alpine
-    container_name: elysia_redis
+    container_name: tln_redis
     restart: unless-stopped
     ports:
       - "6379:6379"
     networks:
-      - elysia_network
+      - tln_network
 volumes:
-  postgres_data:
-  pgadmin_data:
+  mysql_data:
 
 networks:
-  elysia_network:
+  tln_network:
     driver: bridge
