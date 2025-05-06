@@ -30,6 +30,7 @@
     "@react-email/components": "^0.0.33",
     "drizzle-orm": "^0.40.0",
     "elysia": "^1.2.25",
+    "firebase-admin": "^13.3.0",
     "mysql2": "^3.14.1",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0",
