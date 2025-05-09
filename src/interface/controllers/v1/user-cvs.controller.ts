@@ -7,13 +7,13 @@ export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
   .use(userCvsService)
   .use(authMiddleware)
 
-  .get('/:id', async ({ params, getUserCvsById, error }) => {
+  .get('/firestore/:id', async ({ params, getUserCvsByIdFirestore, error }) => {
     try {
       if (!params.id) {
         return error(400, 'User ID is required');
       }
 
-      const cvs = await getUserCvsById(params.id);
+      const cvs = await getUserCvsByIdFirestore(params.id);
       console.log('cvs', cvs);
       return returnSuccess('Get User CVs Successfully', cvs);
     } catch (err: any) {
@@ -21,9 +21,9 @@ export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
     }
   })
 
-  .get('/', async ({ query, getUserCvs, error }) => {
+  .get('/firestore', async ({ query, getUserCvsFirestore, error }) => {
     try {
-      const cvs = await getUserCvs({
+      const cvs = await getUserCvsFirestore({
         cv_publish_state: query.cv_publish_state,
         limit: Number(query.limit),
         nama: query.nama,

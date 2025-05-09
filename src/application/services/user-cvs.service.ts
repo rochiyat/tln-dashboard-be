@@ -3,7 +3,7 @@ import { db } from '@/infrastructure/firebase';
 import { collections } from '@/infrastructure/firebase/collections';
 export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
   .derive(({ store }) => ({
-    async getUserCvsById(id: string) {
+    async getUserCvsByIdFirestore(id: string) {
       const userCvsRepository = await db
         .collection(collections.userCvs)
         .doc(id)
@@ -16,7 +16,7 @@ export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
       return getUserCvs;
     },
 
-    async getUserCvs(query: {
+    async getUserCvsFirestore(query: {
       cv_publish_state: string;
       limit: number;
       nama: string;
