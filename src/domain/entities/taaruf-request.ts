@@ -1,1 +1,31 @@
-export interface taarufRequest {}
+export interface TaarufRequest {
+  id: number;
+  firestoreDocId: string | null;
+  requesterUserId: number | null;
+  requesterUid: string | null;
+  requesterPublicUid: string | null;
+  requesterNama: string | null;
+  requesterDisplayName: string | null;
+  requesterPhone: string | null;
+  receiverUserId: number | null;
+  receiverUid: string | null;
+  receiverPublicUid: string | null;
+  receiverNama: string | null;
+  receiverDisplayName: string | null;
+  receiverGender: string | null;
+  receiverPhone: string | null;
+  requestStatus: string | null;
+  shouldPendingTaaruf: number | null;
+  roomName: string | null;
+  roomUrl: string | null;
+  requesterMadePromise: number | null;
+  receiverMadePromise: number | null;
+  adminPhone: string | null;
+  deadline: number | null;
+  lastUpdated: number | null;
+  supportInAppChat: number | null;
+  conversationId: string | null;
+  taarufState: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
