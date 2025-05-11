@@ -4,6 +4,6 @@ import mysql from 'mysql2';
 
 const connectionString = process.env.MYSQL_URL_TLN;
 const client = mysql.createConnection(connectionString as string);
-export const dbMaster = drizzle(client, { schema, mode: 'default' });
+export const dbTln = drizzle(client, { schema, mode: 'default' });
 
 export { schema };
