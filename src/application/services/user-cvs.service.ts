@@ -1,16 +1,16 @@
 import { Elysia } from 'elysia';
 import { db } from '@/infrastructure/firebase';
 import { collections } from '@/infrastructure/firebase/collections';
+import { DrizzleUserCvsRepository } from '@/infrastructure/database/repositories/user-cvs.repository';
+
 export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
+  .state('userCvsRepository', new DrizzleUserCvsRepository())
   .derive(({ store }) => ({
     async getUserCvsByIdFirestore(id: string) {
-      const userCvsRepository = await db
-        .collection(collections.userCvs)
-        .doc(id)
-        .get();
+      const userCvs = await db.collection(collections.userCvs).doc(id).get();
       const getUserCvs = {
-        id: userCvsRepository.id,
-        ...userCvsRepository.data(),
+        id: userCvs.id,
+        ...userCvs.data(),
       };
 
       return getUserCvs;
@@ -27,7 +27,7 @@ export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
         .collection(collections.userCvs)
         .orderBy('last_updated', 'desc');
 
-      let userCvsRepository;
+      let userCvs;
       if (cv_publish_state) {
         userCvsRef = userCvsRef.where(
           'cv_publish_state',
@@ -40,14 +40,23 @@ export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
         userCvsRef = userCvsRef.where('nama', '==', `${nama}`);
       }
 
-      userCvsRepository = await userCvsRef.limit(limit).get();
+      userCvs = await userCvsRef.limit(limit).get();
 
-      const getUserCvs = userCvsRepository.docs.map((doc) => ({
+      const getUserCvs = userCvs.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
       return getUserCvs;
+    },
+
+    async getUserCvsAll(query: { limit: number; page: number }) {
+      const { limit, page } = query;
+      const offset = (page - 1) * limit;
+
+      const userCvsList = await store.userCvsRepository.findAll(limit, offset);
+
+      return userCvsList;
     },
   }))
   .as('plugin');

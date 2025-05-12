@@ -1,7 +1,8 @@
-import { Elysia } from 'elysia';
+import { Elysia, error } from 'elysia';
 import { userCvsService } from '@/application/services/user-cvs.service';
 import { authMiddleware } from '@/interface/middleware/auth-middleware';
 import { returnSuccess } from '@/infrastructure/utils/http.util';
+import { Query } from 'mysql2/typings/mysql/lib/protocol/sequences/Query';
 
 export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
   .use(userCvsService)
@@ -29,6 +30,31 @@ export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
         nama: query.nama,
       });
       return returnSuccess('Get User CVs Successfully', cvs);
+    } catch (err: any) {
+      return error(500, err.message || 'Get User CVs Failed');
+    }
+  })
+
+  .get('/', async ({ query, getUserCvsAll, error }) => {
+    try {
+      const { limit, page } = query;
+
+      const parsedLimit = parseInt(limit);
+      const parsedPage = parseInt(page);
+
+      if (isNaN(parsedLimit) || isNaN(parsedPage)) {
+        return error(
+          400,
+          'Invalid query parameters: limit and page must be numbers'
+        );
+      }
+
+      const findAllUserCvs = await getUserCvsAll({
+        limit: parsedLimit,
+        page: parsedPage,
+      });
+
+      return findAllUserCvs;
     } catch (err: any) {
       return error(500, err.message || 'Get User CVs Failed');
     }
