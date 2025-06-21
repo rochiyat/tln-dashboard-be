@@ -1,4 +1,5 @@
 import { Elysia } from 'elysia';
+import dayjs from 'dayjs';
 import { db } from '@/infrastructure/firebase';
 import { collections } from '@/infrastructure/firebase/collections';
 import { DrizzleUserCvsRepository } from '@/infrastructure/database/repositories/user-cvs.repository';
@@ -50,13 +51,28 @@ export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
       return getUserCvs;
     },
 
-    async getUserCvsAll(query: { limit: number; page: number }) {
+    async getUserCvsAll(query: { limit: number; page: number; key: string }) {
       const { limit, page } = query;
       const offset = (page - 1) * limit;
+      if (query.key) {
+        query.key = query.key.toLowerCase();
+      }
 
-      const userCvsList = await store.userCvsRepository.findAll(limit, offset);
+      const userCvsList = await store.userCvsRepository.findAll(
+        limit,
+        offset,
+        query
+      );
+      const userCvsCount = await store.userCvsRepository.count(query);
 
-      return userCvsList;
+      const result = {
+        success: true,
+        message: 'Get User CVs Success',
+        data: userCvsList,
+        count: userCvsCount,
+      };
+
+      return result;
     },
   }))
   .as('plugin');

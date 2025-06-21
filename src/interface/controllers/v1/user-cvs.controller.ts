@@ -37,7 +37,7 @@ export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
 
   .get('/', async ({ query, getUserCvsAll, error }) => {
     try {
-      const { limit, page } = query;
+      const { limit, page, key } = query;
 
       const parsedLimit = parseInt(limit);
       const parsedPage = parseInt(page);
@@ -52,6 +52,7 @@ export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
       const findAllUserCvs = await getUserCvsAll({
         limit: parsedLimit,
         page: parsedPage,
+        key,
       });
 
       return findAllUserCvs;

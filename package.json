@@ -28,6 +28,7 @@
     "@elysiajs/jwt": "^1.2.0",
     "@elysiajs/swagger": "^1.2.2",
     "@react-email/components": "^0.0.33",
+    "dayjs": "^1.11.13",
     "drizzle-orm": "^0.40.0",
     "elysia": "^1.2.25",
     "firebase-admin": "^13.3.0",

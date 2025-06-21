@@ -75,4 +75,10 @@ export interface userCvsList {
   id: number;
   userId: number | null;
   firestoreDocId: string | null;
+  nama: string | null;
+  cvPublishState: string | null;
+  cvPublishExpiry: number | null;
+  cvPendingExpiry: number | null;
+  uid: string | null;
+  publicUid: string | null;
 }
