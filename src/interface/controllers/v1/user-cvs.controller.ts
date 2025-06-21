@@ -59,4 +59,13 @@ export const userCvsControllerV1 = new Elysia({ prefix: '/user-cvs' })
     } catch (err: any) {
       return error(500, err.message || 'Get User CVs Failed');
     }
+  })
+
+  .get('/:publicUid', async ({ params, getUserCvsByPublicUid, error }) => {
+    try {
+      const cvs = await getUserCvsByPublicUid({ publicUid: params.publicUid });
+      return cvs;
+    } catch (err: any) {
+      return error(500, err.message || 'Get User CVs By Public UID Failed');
+    }
   });

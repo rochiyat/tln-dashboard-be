@@ -74,5 +74,18 @@ export const userCvsService = new Elysia({ name: 'Service.UserCvs' })
 
       return result;
     },
+
+    async getUserCvsByPublicUid(query: { publicUid: string }) {
+      const { publicUid } = query;
+      const userCvs = await store.userCvsRepository.findByPublicUid(publicUid);
+
+      const result = {
+        success: true,
+        message: 'Get User CVs By Public UID Success',
+        data: userCvs,
+      };
+
+      return result;
+    },
   }))
   .as('plugin');

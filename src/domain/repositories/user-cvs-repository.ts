@@ -1,4 +1,4 @@
-import { userCvsList } from '../entities/user-cvs';
+import { UserCvsEntity, userCvsList } from '../entities/user-cvs';
 
 export interface UserCvsRepository {
   findAll(
@@ -6,4 +6,6 @@ export interface UserCvsRepository {
     offset: number,
     query: { key: string }
   ): Promise<userCvsList[]>;
+  count(query: { key: string }): Promise<number>;
+  findByPublicUid(publicUid: string): Promise<UserCvsEntity | null>;
 }

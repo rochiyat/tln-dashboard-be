@@ -1,11 +1,11 @@
 export interface UserCvsEntity {
-  id: number;
+  id: number | null;
   userId: number | null;
   firestoreDocId: string | null;
   nama: string | null;
   displayName: string | null;
-  applyCount: number;
-  beratBadan: string;
+  applyCount: number | null;
+  beratBadan: string | null;
   celanaDiatasMataKaki: string | null;
   ciriFisikCatatan: string | null;
   ciriFisikJenggot: string | null;
@@ -14,11 +14,11 @@ export interface UserCvsEntity {
   ciriFisikWajah: string | null;
   ciriFisikWarnaKulit: string | null;
   ciriFisikWarnaRambut: string | null;
-  ciriFisikByAdmin: string;
-  cvPendingExpiry: number;
-  cvPublishExpiry: number;
+  ciriFisikByAdmin: string | null;
+  cvPendingExpiry: number | null;
+  cvPublishExpiry: number | null;
   cvPublishState: string | null;
-  hasFirstPublished: number;
+  hasFirstPublished: number | null;
   cvUnpublishedReason: string | null;
   referralId: string | null;
   daerahAsal: string | null;
@@ -27,16 +27,16 @@ export interface UserCvsEntity {
   domisili: string | null;
   domicileCityId: string | null;
   domicileProvinceId: string | null;
-  domicileLatitude: string; // decimal → string atau number tergantung setting
-  domicileLongitude: string;
+  domicileLatitude: string | null;
+  domicileLongitude: string | null;
   foto: string | null;
   fotoBlurred: string | null;
   fotoKtp: string | null;
   akteCerai: string | null;
   gender: string | null;
-  hasUnreadMessage: number;
+  hasUnreadMessage: number | null;
   hobi: string | null;
-  isAdminApproved: number;
+  isAdminApproved: number | null;
   jumlahAnak: string | null;
   jumlahHafalanQuran: string | null;
   karakterDanSifat: string | null;
@@ -66,7 +66,7 @@ export interface UserCvsEntity {
   tglLahir: string | null;
   tinggiBadan: string | null;
   uid: string | null;
-  viewCount: number;
+  viewCount: number | null;
   createdAt: Date | null;
   updatedAt: Date | null;
 }
